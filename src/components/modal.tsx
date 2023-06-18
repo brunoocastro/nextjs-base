@@ -1,13 +1,13 @@
-import {} from "crypto";
-import { nanoid } from "nanoid";
-import { Dispatch, PropsWithChildren, useEffect } from "react";
-import { useOutClick } from "../hooks/useOutClick";
-import { Portal } from "./portal";
+import { } from 'crypto'
+import { nanoid } from 'nanoid'
+import { Dispatch, PropsWithChildren, useEffect } from 'react'
+import { useOutClick } from '../hooks/useOutClick'
+import { Portal } from './portal'
 
 interface IModal {
-  isOpen: boolean;
-  setOpen: Dispatch<boolean>;
-  showBackdrop?: boolean;
+  isOpen: boolean
+  setOpen: Dispatch<boolean>
+  showBackdrop?: boolean
 }
 
 const ModalBackdrop = () => {
@@ -18,13 +18,13 @@ const ModalBackdrop = () => {
       style={{
         opacity: 0.7,
         zIndex: 50,
-        position: "fixed",
+        position: 'fixed',
         inset: 0,
-        background: "#000",
+        background: '#000',
       }}
     />
-  );
-};
+  )
+}
 
 export const Modal = ({
   isOpen,
@@ -32,16 +32,16 @@ export const Modal = ({
   showBackdrop = true,
   children,
 }: PropsWithChildren<IModal>) => {
-  const modalId = nanoid();
+  const modalId = nanoid()
 
   const { OutClickProps, register } = useOutClick({
     referenceId: `modal-${modalId}`,
     onOutClick: () => setOpen(false),
-  });
+  })
 
   useEffect(() => {
-    isOpen && register();
-  }, [isOpen, register]);
+    isOpen && register()
+  }, [isOpen, register])
 
   return (
     <Portal selector="#portal-modal">
@@ -54,5 +54,5 @@ export const Modal = ({
         <></>
       )}
     </Portal>
-  );
-};
+  )
+}

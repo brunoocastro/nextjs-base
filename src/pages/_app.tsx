@@ -1,6 +1,6 @@
-import { AppProps } from "next/app";
-import { RecoilRoot } from "recoil";
-import { LayoutProvider } from "../components/layoutProvider";
+import { AppProps } from 'next/app'
+import { RecoilRoot } from 'recoil'
+import { LayoutProvider } from '../components/layoutProvider'
 
 function App({ Component, pageProps }: AppProps) {
   return (
@@ -9,7 +9,7 @@ function App({ Component, pageProps }: AppProps) {
         <Component {...pageProps}></Component>
       </LayoutProvider>
     </RecoilRoot>
-  );
+  )
 }
 
-export default App;
+export default App

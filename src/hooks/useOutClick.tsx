@@ -1,10 +1,10 @@
-import { useCallback, useEffect, useMemo } from "react";
-import { flatChildArray } from "../utils/dom";
+import { useCallback, useEffect, useMemo } from 'react'
+import { flatChildArray } from '../utils/dom'
 
 interface IOutClick {
-  referenceId: string;
-  onOutClick: VoidFunction;
-  ignoreOutClick?: boolean;
+  referenceId: string
+  onOutClick: VoidFunction
+  ignoreOutClick?: boolean
 }
 
 export function useOutClick({
@@ -13,38 +13,45 @@ export function useOutClick({
   ignoreOutClick = false,
 }: IOutClick) {
   const OutClickProps = useMemo(
-    () => ({ "outclick-reference-id": referenceId }),
-    [referenceId]
-  );
+    () => ({ 'outclick-reference-id': referenceId }),
+    [referenceId],
+  )
 
   const OutClickHandler = useCallback(
     (e: MouseEvent) => {
-      if(ignoreOutClick || e.button !== 0 ) return
+      if (ignoreOutClick || e.button !== 0) return
 
-      let parentComponent = (e.target as HTMLElement).closest(`[outclick-reference-id]='${referenceId}'`)
+      const parentComponent = (e.target as HTMLElement).closest(
+        `[outclick-reference-id]='${referenceId}'`,
+      )
 
-      if(!parentComponent) return onOutClick()
+      if (!parentComponent) return onOutClick()
 
-      if(flatChildArray(parentComponent as HTMLElement).includes(e.target as HTMLElement)) return;
+      if (
+        flatChildArray(parentComponent as HTMLElement).includes(
+          e.target as HTMLElement,
+        )
+      )
+        return
 
-      onOutClick();
+      onOutClick()
     },
-    [ignoreOutClick, onOutClick, referenceId]
-  );
+    [ignoreOutClick, onOutClick, referenceId],
+  )
 
   const register = useCallback(() => {
-    document.addEventListener("mouseup", OutClickHandler, false);
-  }, [OutClickHandler]);
+    document.addEventListener('mouseup', OutClickHandler, false)
+  }, [OutClickHandler])
 
   useEffect(
     () => () => {
-      document.removeEventListener("mouseup", OutClickHandler);
+      document.removeEventListener('mouseup', OutClickHandler)
     },
-    [OutClickHandler]
-  );
+    [OutClickHandler],
+  )
 
   return {
     register,
     OutClickProps,
-  };
+  }
 }

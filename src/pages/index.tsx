@@ -1,30 +1,29 @@
-"use client";
+'use client'
 
-import Image from "next/image";
-import { Inter } from "next/font/google";
-import { useRecoilState } from "recoil";
-import { subscribeModalAtom } from "../atoms/modals";
-import { useEffect } from "react";
+import { Inter } from 'next/font/google'
+import { useEffect } from 'react'
+import { useRecoilState } from 'recoil'
+import { subscribeModalAtom } from '../atoms/modals'
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  const [isModalOpen, setModalOpen] = useRecoilState(subscribeModalAtom);
+  const [isModalOpen, setModalOpen] = useRecoilState(subscribeModalAtom)
 
   useEffect(() => {
-    console.log({ isModalOpen });
-  }, [isModalOpen]);
+    console.log({ isModalOpen })
+  }, [isModalOpen])
 
   return (
     <main>
-      <p>Salve rapaziada no NV99</p>
+      <p>Teste de página inicial</p>
       <button
         onClick={() => {
-          setModalOpen((current) => !current);
+          setModalOpen((current) => !current)
         }}
       >
         BOTAO
       </button>
     </main>
-  );
+  )
 }
